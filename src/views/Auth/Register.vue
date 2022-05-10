@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-5">
+  <div class="mt-5 text-center">
       <h1>Register</h1>
   </div>
   <div class="h-25 w-25 mx-auto mt-5">
