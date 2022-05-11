@@ -11,6 +11,7 @@ import Dashboard from "../views/Admin/Dashboard/Dashboard.vue"
 import AllProducts from "../views/Admin/AllProducts/AllProducts.vue"
 import CreateProduct from "../views/Admin/AllProducts/CreateProduct.vue"
 import ProductDetail from "../views/Admin/AllProducts/ProductDetail.vue"
+import EditProduct from "../views/Admin/AllProducts/EditProduct.vue"
 import AllUsers from "../views/Admin/AllUsers/AllUsers.vue"
 
 import MainBuyer from "../views/Buyer/MainBuyer.vue"
@@ -103,6 +104,12 @@ const routes = [
                 path: "all-products/product-detail/:id",
                 name: "ProductDetail",
                 component: ProductDetail,
+                meta: { requireAuth: true }
+            },
+            {
+                path: "all-products/product-detail/:id/edit",
+                name: "EditProduct",
+                component: EditProduct,
                 meta: { requireAuth: true }
             },
             {

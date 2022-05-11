@@ -63,7 +63,6 @@ export default {
         })
       },
       handleDetailProduct(id) {
-        console.log(id)
         this.$router.push({ name: "ProductDetail", params: { id } })
       }
     },

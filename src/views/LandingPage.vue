@@ -1,6 +1,6 @@
 <template>
     <Navbar />
-        <div class="mt-5">
+        <div class="mt-5 text-center">
             <h1>Landing Page</h1>
         </div>
 </template>
