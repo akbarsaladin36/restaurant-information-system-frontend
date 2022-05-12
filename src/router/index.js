@@ -13,6 +13,7 @@ import CreateProduct from "../views/Admin/AllProducts/CreateProduct.vue"
 import ProductDetail from "../views/Admin/AllProducts/ProductDetail.vue"
 import EditProduct from "../views/Admin/AllProducts/EditProduct.vue"
 import AllUsers from "../views/Admin/AllUsers/AllUsers.vue"
+import CreateUser from "../views/Admin/AllUsers/CreateUser.vue"
 
 import MainBuyer from "../views/Buyer/MainBuyer.vue"
 import Home from "../views/Buyer/Home/Home.vue"
@@ -117,6 +118,12 @@ const routes = [
                 name: "AllUsers",
                 component: AllUsers,
                 meta: { requireAuth: true }
+            },
+            {
+                path: "all-users/create",
+                name: 'CreateUser',
+                component: CreateUser,
+                meta: { requireAuth: true }
             }
         ]
     }
@@ -138,16 +145,17 @@ router.beforeEach((to, from, next) => {
             next()
         }
     } else if(to.matched.some(record => record.meta.requireVisitor)) {
+        const isAuthenticateds = localStorage.getItem('token')
         const roles = localStorage.getItem('roles')
-        if(isAuthenticated && roles === 'admin') {
+        if(isAuthenticateds && roles === 'admin') {
             next({
                 path: '/admin/dashboard'
             })
-        } else if(isAuthenticated && roles === 'staff') {
+        } else if(isAuthenticateds && roles === 'staff') {
             next({
                 path: '/staff/dashboard'
             })
-        } else if(isAuthenticated && roles === 'buyer') {
+        } else if(isAuthenticateds && roles === 'buyer') {
             next({
                 path: '/buyer/home'
             })
@@ -156,7 +164,7 @@ router.beforeEach((to, from, next) => {
         }
     } else {
         next()
-    } 
+    }
 })
 
 export default router
