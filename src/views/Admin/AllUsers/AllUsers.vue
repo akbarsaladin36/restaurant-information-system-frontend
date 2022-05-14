@@ -49,7 +49,6 @@ export default {
       handleGetAllUsers() {
         axiosApiIntances.get('users')
         .then((res) => {
-          console.log(res)
           this.allUsers = res.data.data
         })
         .catch((err) => {
@@ -57,7 +56,7 @@ export default {
         })
       },
       handleUserDetail(id) {
-        console.log(id)
+        this.$router.push({ name: 'UserDetail', params: { id } })
       },
       handleDeleteUser(id) {
         console.log(id)

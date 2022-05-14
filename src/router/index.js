@@ -14,6 +14,7 @@ import ProductDetail from "../views/Admin/AllProducts/ProductDetail.vue"
 import EditProduct from "../views/Admin/AllProducts/EditProduct.vue"
 import AllUsers from "../views/Admin/AllUsers/AllUsers.vue"
 import CreateUser from "../views/Admin/AllUsers/CreateUser.vue"
+import UserDetail from "../views/Admin/AllUsers/UserDetail.vue"
 
 import MainBuyer from "../views/Buyer/MainBuyer.vue"
 import Home from "../views/Buyer/Home/Home.vue"
@@ -31,7 +32,7 @@ const routes = [
         path: "/auth",
         name: "MainAuth",
         component: MainAuth,
-        meta: { requireVisitor: true},
+        meta: { requireVisitor: true },
         children: 
         [
             {
@@ -53,26 +54,27 @@ const routes = [
         path: "/buyer",
         name: "MainBuyer",
         component: MainBuyer,
-        meta: { requireAuth: true },
+        redirect: '/buyer/home',
+        meta: { requireAuth: true, roles: 'buyer' },
         children:
         [
             {
                 path: "home",
                 name: "Home",
                 component: Home,
-                meta: { requireAuth: true }
+                meta: { requireAuth: true, roles: 'buyer' }
             },
             {
                 path: "profile/:id",
                 name: "Profile",
                 component: Profile,
-                meta: { requireAuth: true }
+                meta: { requireAuth: true, roles: 'buyer' }
             },
             {
                 path: "profile/:id/edit-profile",
                 name: "EditProfile",
                 component: EditProfile,
-                meta: { requireAuth: true }
+                meta: { requireAuth: true, roles: 'buyer' }
             }
         ]
     },
@@ -80,50 +82,57 @@ const routes = [
         path: "/admin",
         name: "MainAdmin",
         component: MainAdmin,
-        meta: { requireAuth: true },
+        redirect: '/admin/dashboard',
+        meta: { requireAuth: true, roles: 'admin' },
         children: 
         [
             {
                 path: "dashboard",
                 name: "Dashboard",
                 component: Dashboard,
-                meta: { requireAuth: true }
+                meta: { requireAuth: true, roles: 'admin' }
             },
             {
                 path: "all-products",
                 name: "AllProducts",
                 component: AllProducts,
-                meta: { requireAuth: true },
+                meta: { requireAuth: true, roles: 'admin' }
             },
             {
                 path: "all-products/create",
                 name: "CreateProduct",
                 component: CreateProduct,
-                meta: { requireAuth: true }
+                meta: { requireAuth: true, roles: 'admin'}
             },
             {
                 path: "all-products/product-detail/:id",
                 name: "ProductDetail",
                 component: ProductDetail,
-                meta: { requireAuth: true }
+                meta: { requireAuth: true, roles: 'admin' }
             },
             {
                 path: "all-products/product-detail/:id/edit",
                 name: "EditProduct",
                 component: EditProduct,
-                meta: { requireAuth: true }
+                meta: { requireAuth: true, roles: 'admin' }
             },
             {
                 path: "all-users",
                 name: "AllUsers",
                 component: AllUsers,
-                meta: { requireAuth: true }
+                meta: { requireAuth: true, roles: 'admin' }
             },
             {
                 path: "all-users/create",
                 name: 'CreateUser',
                 component: CreateUser,
-                meta: { requireAuth: true }
+                meta: { requireAuth: true, roles: 'admin' }
+            },
+            {
+                path: 'all-users/user-detail/:id',
+                name: 'UserDetail',
+                component: UserDetail,
+                meta: { requireAuth: true, roles: 'admin' }
             }
         ]
     }
@@ -135,30 +144,30 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const isAuthenticated = localStorage.getItem('token')
     if(to.matched.some(record => record.meta.requireAuth)) {
-        if(!isAuthenticated) {
-            next({
-                path: '/auth/login'
-            })
+        const token = localStorage.getItem('token')
+        if(!token) {
+            next('/auth/login')
         } else {
-            next()
+            const roles = localStorage.getItem('roles')
+            if(to.matched.some(record => record.meta.roles)) {
+                if(roles === to.meta.roles) {
+                    next()
+                } else {
+                    localStorage.clear()
+                    next('/auth/login')
+                }
+            } else {
+                next()
+            }
         }
     } else if(to.matched.some(record => record.meta.requireVisitor)) {
-        const isAuthenticateds = localStorage.getItem('token')
+        const token = localStorage.getItem('token')
         const roles = localStorage.getItem('roles')
-        if(isAuthenticateds && roles === 'admin') {
-            next({
-                path: '/admin/dashboard'
-            })
-        } else if(isAuthenticateds && roles === 'staff') {
-            next({
-                path: '/staff/dashboard'
-            })
-        } else if(isAuthenticateds && roles === 'buyer') {
-            next({
-                path: '/buyer/home'
-            })
+        if(token && roles === 'admin') {
+            next('/admin/dashboard')
+        } else if (token && roles === 'buyer') {
+            next('/buyer/home')
         } else {
             next()
         }

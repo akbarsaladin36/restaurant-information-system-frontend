@@ -45,7 +45,6 @@ export default {
                 localStorage.setItem('roles', res.data.data.roles)
                 localStorage.setItem('user', res.data.data._id)
                 if(res.data.data.roles === 'admin') {
-                    console.log('Ini adalah admin')
                     Swal.fire({
                         icon: 'success',
                         title: 'Success!',

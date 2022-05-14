@@ -37,7 +37,6 @@ export default {
         const id = this.$route.params.id
         axiosApiIntances.get(`products/${id}`)
         .then((res) => {
-          console.log(res)
           this.productDetail = res.data.data
         })
         .catch((err) => {

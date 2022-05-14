@@ -51,7 +51,6 @@ export default {
             }
             axiosApiIntances.post('users', data)
             .then((res) => {
-                console.log(res)
                 Swal.fire({
                     icon: 'success',
                     title: 'Success!',
