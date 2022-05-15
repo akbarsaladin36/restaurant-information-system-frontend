@@ -40,7 +40,6 @@ export default {
             }
             axiosApiIntances.post('auth/login', data)
             .then((res) => {
-                console.log(res)
                 localStorage.setItem('token', res.data.data.token)
                 localStorage.setItem('roles', res.data.data.roles)
                 localStorage.setItem('user', res.data.data._id)
@@ -52,7 +51,12 @@ export default {
                     })
                     this.$router.push({ path: '/admin/dashboard' })
                 } else if (res.data.data.roles === 'staff') {
-                    console.log('Ini adalah staff')
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: res.data.msg
+                    })
+                    this.$router.push({ path: '/staff/all-orders' })
                 } else {
                     Swal.fire({
                         icon: 'success',

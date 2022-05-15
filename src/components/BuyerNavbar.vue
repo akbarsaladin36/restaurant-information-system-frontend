@@ -11,7 +11,7 @@
                 <a href="#" class="nav-link">All Orders</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">All Payment</a>
+                <a href="#" class="nav-link">All Payments</a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">All Messages</a>

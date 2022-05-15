@@ -1,4 +1,5 @@
 import { createWebHistory, createRouter, routerViewLocationKey } from "vue-router"
+import Swal from "sweetalert2"
 
 import LandingPage from "../views/LandingPage.vue"
 
@@ -15,6 +16,10 @@ import EditProduct from "../views/Admin/AllProducts/EditProduct.vue"
 import AllUsers from "../views/Admin/AllUsers/AllUsers.vue"
 import CreateUser from "../views/Admin/AllUsers/CreateUser.vue"
 import UserDetail from "../views/Admin/AllUsers/UserDetail.vue"
+
+import MainStaff from "../views/Staff/MainStaff.vue"
+import AllOrders from "../views/Staff/AllOrders/AllOrders.vue"
+import AllPayments from "../views/Staff/AllPayments/AllPayments.vue"
 
 import MainBuyer from "../views/Buyer/MainBuyer.vue"
 import Home from "../views/Buyer/Home/Home.vue"
@@ -135,6 +140,27 @@ const routes = [
                 meta: { requireAuth: true, roles: 'admin' }
             }
         ]
+    },
+    {
+        path: '/staff',
+        name: 'MainStaff',
+        component: MainStaff,
+        meta: { requireAuth: true, roles: 'staff' },
+        children:
+        [
+            {
+                path: 'all-orders',
+                name: 'AllOrders',
+                component: AllOrders,
+                meta: { requireAuth: true, roles: 'staff' }
+            },
+            {
+                path: 'all-payments',
+                name: 'AllPayments',
+                component: AllPayments,
+                meta: { requireAuth: true, roles: 'staff' }
+            }
+        ]
     }
 ]
 
@@ -155,6 +181,11 @@ router.beforeEach((to, from, next) => {
                     next()
                 } else {
                     localStorage.clear()
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Access Restricted!',
+                        text: `This page is restricted access! Please logged in if you are staff or admin!`
+                    })
                     next('/auth/login')
                 }
             } else {
@@ -168,6 +199,8 @@ router.beforeEach((to, from, next) => {
             next('/admin/dashboard')
         } else if (token && roles === 'buyer') {
             next('/buyer/home')
+        } else if(token && roles === 'staff') {
+            next('/staff/all-orders')
         } else {
             next()
         }
