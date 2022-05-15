@@ -46,7 +46,6 @@ export default {
             }
             axiosApiIntances.post('auth/register', data)
             .then((res) => {
-                console.log(res)
                 Swal.fire({
                     icon: 'success',
                     title: 'Success!',
