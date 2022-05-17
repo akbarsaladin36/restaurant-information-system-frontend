@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto my-auto">
             <li class="nav-item">
-                <a href="#" class="nav-link">All Orders</a>
+                <router-link to="/buyer/all-orders" class="nav-link">All Orders</router-link>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">All Payments</a>

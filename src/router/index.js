@@ -25,6 +25,9 @@ import MainBuyer from "../views/Buyer/MainBuyer.vue"
 import Home from "../views/Buyer/Home/Home.vue"
 import Profile from "../views/Buyer/Profile/Profile.vue"
 import EditProfile from "../views/Buyer/Profile/EditProfile.vue"
+import AllBuyerOrders from "../views/Buyer/AllOrders/AllBuyerOrders.vue"
+import BuyerOrderDetail from "../views/Buyer/AllOrders/BuyerOrderDetail.vue"
+import BuyerProductDetail from "../views/Buyer/BuyerProduct/BuyerProductDetail.vue"
 
 const routes = [
     {
@@ -79,6 +82,24 @@ const routes = [
                 path: "profile/:id/edit-profile",
                 name: "EditProfile",
                 component: EditProfile,
+                meta: { requireAuth: true, roles: 'buyer' }
+            },
+            {
+                path: "all-orders",
+                name: "AllBuyerOrders",
+                component: AllBuyerOrders,
+                meta: { requireAuth: true, roles: 'buyer' }
+            },
+            {
+                path: "order-detail/:id",
+                name: "BuyerOrderDetail",
+                component: BuyerOrderDetail,
+                meta: { requireAuth: true, roles: 'buyer' }
+            },
+            {
+                path: "product-detail/:id",
+                name: "BuyerProductDetail",
+                component: BuyerProductDetail,
                 meta: { requireAuth: true, roles: 'buyer' }
             }
         ]
