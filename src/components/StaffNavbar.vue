@@ -10,6 +10,9 @@
             <li class="nav-item">
                 <router-link to="/staff/all-payments" class="nav-link">All Payments</router-link>
             </li>
+            <li class="nav-item">
+                <router-link to="#" class="nav-link">All Messages</router-link>
+            </li>
         </ul>
         <ul class="navbar-nav ms-auto my-auto">
             <li class="nav-item">
