@@ -20,6 +20,7 @@ import UserDetail from "../views/Admin/AllUsers/UserDetail.vue"
 import MainStaff from "../views/Staff/MainStaff.vue"
 import AllOrders from "../views/Staff/AllOrders/AllOrders.vue"
 import AllPayments from "../views/Staff/AllPayments/AllPayments.vue"
+import AllStaffMessages from "../views/Staff/AllStaffMessages/AllStaffMessages.vue"
 
 import MainBuyer from "../views/Buyer/MainBuyer.vue"
 import Home from "../views/Buyer/Home/Home.vue"
@@ -179,6 +180,12 @@ const routes = [
                 path: 'all-payments',
                 name: 'AllPayments',
                 component: AllPayments,
+                meta: { requireAuth: true, roles: 'staff' }
+            },
+            {
+                path: 'all-messages',
+                name: 'AllStaffMessages',
+                component: AllStaffMessages,
                 meta: { requireAuth: true, roles: 'staff' }
             }
         ]
