@@ -1,17 +1,19 @@
 <template>
-  <div class="mt-5 text-center">
-      <h1>All Payments</h1>
-  </div>
+    <div class="mt-5 text-center">
+        <h1>All Messages</h1>
+    </div>
 
-  <div class="mt-5">
+    <a href="#" class="btn btn-primary mt-5">New Message</a>
+
+    <div class="mt-5">
     <table class="table table-bordered border-dark">
       <thead>
         <tr>
           <th>#</th>
-          <th>Product Name</th>
-          <th>Payment Amount</th>
-          <th>Payment Type</th>
-          <th>Payment Status</th>
+          <th>Message Title</th>
+          <th>Sent To</th>
+          <th>Message Status</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -31,7 +33,7 @@
 
 <script>
 export default {
-    name: 'AllPayments'
+    name: 'BuyerAllMessages'
 }
 </script>
 

@@ -1,7 +1,9 @@
 <template>
-  <div class="mt-5 text-center">
+   <div class="mt-5 text-center">
       <h1>All Payments</h1>
   </div>
+
+  <router-link to="/buyer/all-payments/create" class="btn btn-primary mt-5">New Payments</router-link>
 
   <div class="mt-5">
     <table class="table table-bordered border-dark">
@@ -31,7 +33,7 @@
 
 <script>
 export default {
-    name: 'AllPayments'
+    name: 'AllBuyerPayments'
 }
 </script>
 

@@ -11,10 +11,10 @@
                 <router-link to="/buyer/all-orders" class="nav-link">All Orders</router-link>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">All Payments</a>
+                <router-link to="/buyer/all-payments" class="nav-link">All Payments</router-link>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">All Messages</a>
+                <router-link to="/buyer/all-messages" class="nav-link">All Messages</router-link>
             </li>
         </ul>
         <ul class="navbar-nav ms-auto my-auto">
