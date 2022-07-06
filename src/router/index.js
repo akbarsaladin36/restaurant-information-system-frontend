@@ -16,9 +16,6 @@ import EditProduct from "../views/Admin/AllProducts/EditProduct.vue"
 import AllUsers from "../views/Admin/AllUsers/AllUsers.vue"
 import CreateUser from "../views/Admin/AllUsers/CreateUser.vue"
 import UserDetail from "../views/Admin/AllUsers/UserDetail.vue"
-import AllBuyerPayments from "../views/Buyer/AllBuyerPayments/AllBuyerPayments.vue"
-import BuyerCreatePayment from "../views/Buyer/AllBuyerPayments/BuyerCreatePayment.vue"
-import BuyerAllMessages from "../views/Buyer/AllMessages/BuyerAllMessages.vue";
 
 import MainStaff from "../views/Staff/MainStaff.vue"
 import AllOrders from "../views/Staff/AllOrders/AllOrders.vue"
@@ -32,6 +29,9 @@ import EditProfile from "../views/Buyer/Profile/EditProfile.vue"
 import AllBuyerOrders from "../views/Buyer/AllOrders/AllBuyerOrders.vue"
 import BuyerOrderDetail from "../views/Buyer/AllOrders/BuyerOrderDetail.vue"
 import BuyerProductDetail from "../views/Buyer/BuyerProduct/BuyerProductDetail.vue"
+import AllBuyerPayments from "../views/Buyer/AllBuyerPayments/AllBuyerPayments.vue"
+import BuyerCreatePayment from "../views/Buyer/AllBuyerPayments/BuyerCreatePayment.vue"
+import BuyerAllMessages from "../views/Buyer/AllMessages/BuyerAllMessages.vue"
 
 const routes = [
     {

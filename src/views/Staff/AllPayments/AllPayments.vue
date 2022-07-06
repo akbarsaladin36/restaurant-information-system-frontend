@@ -30,8 +30,23 @@
 </template>
 
 <script>
+// import axiosApiIntances from '../../../utils/axios'
 export default {
-    name: 'AllPayments'
+    name: 'AllPayments',
+    data() {
+      return {
+        allPayments: [],
+        allProducts: []
+      }
+    },
+    methods: {
+      getAllPayments() {
+        console.log('coming soon untuk tampilan payments')
+      }
+    },
+    created() {
+      this.getAllPayments()
+    }
 }
 </script>
 
