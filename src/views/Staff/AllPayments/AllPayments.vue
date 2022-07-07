@@ -9,19 +9,26 @@
         <tr>
           <th>#</th>
           <th>Product Name</th>
+          <th>Customer</th>
           <th>Payment Amount</th>
           <th>Payment Type</th>
           <th>Payment Status</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Test123</td>
-          <td>Test123</td>
-          <td>Test123</td>
+        <tr v-for="(payment, index) in allPayments" :key="index++">
+          <td>{{ index }}</td>
+          <td>{{ payment.product_detail[0].product_name }}</td>
+          <td>{{ payment.user_detail[0].username }}</td>
+          <td>{{ payment.payment_amount }}</td>
+          <td>{{ payment.payment_type }}</td>
           <td>
-            Test123
+            <div v-if="payment.payment_status === 'pending'">
+              <a @click.prevent="handleVerifyPayment(payment._id)" class="btn btn-success">Verify</a>
+            </div>
+            <div v-else>
+              {{ payment.payment_status }}
+            </div>  
           </td>
         </tr>
       </tbody>
@@ -30,7 +37,8 @@
 </template>
 
 <script>
-// import axiosApiIntances from '../../../utils/axios'
+import Swal from 'sweetalert2'
+import axiosApiIntances from '../../../utils/axios'
 export default {
     name: 'AllPayments',
     data() {
@@ -41,7 +49,32 @@ export default {
     },
     methods: {
       getAllPayments() {
-        console.log('coming soon untuk tampilan payments')
+          axiosApiIntances.get('payments')
+          .then((res)=>{
+            this.allPayments = res.data.data
+          })
+          .catch((err)=>{
+            console.log(err)
+          })
+        },
+      handleVerifyPayment(id) {
+          axiosApiIntances.patch(`payments/${id}`)
+          .then((res)=>{
+            Swal.fire({
+              icon: 'success',
+              title: 'Success!',
+              text: res.data.msg
+            })
+            this.$router.push({ path: '/buyer/all-payments' })
+          })
+          .catch((err)=>{
+            console.log(err)
+              Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: err.response.data.msg
+              })
+          })
       }
     },
     created() {

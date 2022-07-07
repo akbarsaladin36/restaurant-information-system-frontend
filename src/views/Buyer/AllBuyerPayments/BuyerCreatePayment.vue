@@ -7,7 +7,7 @@
     <form @submit.prevent="handleCreatePayment" method="post">
       <div class="form-group mt-3">
         <label for="product_id">Product ID</label>
-        <select name="product_id" v-model="formPayments.productId" id="product_id" class="form-control">
+        <select name="product_id" v-model="formPayments.productId" id="product_id" class="form-select" value="Pilih Barang">
             <option v-for="(item, index) in allProduct" :key="index" :value="item._id"> 
                {{item.product_name}}
             </option>
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 import axiosApiIntances from "../../../utils/axios"
 export default {
     name: "BuyerCreatePayment",
@@ -47,7 +48,7 @@ export default {
       }
     },
     methods: {
-        handleGetAllProducts() {
+      handleGetAllProducts() {
         axiosApiIntances.get('products')
         .then((res)=>{
           this.allProduct = res.data.data;
@@ -65,10 +66,20 @@ export default {
         }
         axiosApiIntances.post('payments/create', data)
         .then((res)=>{
-          console.log(res)
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: res.data.msg
+          })
+          this.$router.push({ path: '/buyer/all-payments' })
         })
         .catch((err)=>{
           console.log(err)
+          Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: err.response.data.msg
+          })
         })
       }
     },
