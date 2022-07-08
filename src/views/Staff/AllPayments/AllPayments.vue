@@ -58,14 +58,15 @@ export default {
           })
         },
       handleVerifyPayment(id) {
-          axiosApiIntances.patch(`payments/${id}`)
+          axiosApiIntances.patch(`payments/verify-payment/${id}`)
           .then((res)=>{
             Swal.fire({
               icon: 'success',
               title: 'Success!',
               text: res.data.msg
             })
-            this.$router.push({ path: '/buyer/all-payments' })
+            this.$router.push({ path: '/staff/all-payments' })
+            this.getAllPayments()
           })
           .catch((err)=>{
             console.log(err)

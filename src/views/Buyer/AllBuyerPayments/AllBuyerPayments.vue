@@ -10,7 +10,7 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Product ID</th>
+          <th>Product Name</th>
           <th>Payment Amount</th>
           <th>Payment Type</th>
           <th>Payment Status</th>
@@ -19,7 +19,7 @@
       <tbody>
         <tr v-for="(payment, index) in allPayments" :key="index++">
           <td>{{ index }}</td>
-          <td>{{ payment.product_id }}</td>
+          <td>{{ payment.product_detail[0].product_name }}</td>
           <td>{{ payment.payment_amount }}</td>
           <td>{{ payment.payment_type }}</td>
           <td>
@@ -44,6 +44,7 @@ export default {
       handleGetAllPayments() {
         axiosApiIntances.get('payments/my-payments')
         .then((res)=>{
+          console.log(res)
           this.allPayments = res.data.data
         })
         .catch((err)=>{
