@@ -32,6 +32,7 @@ import BuyerProductDetail from "../views/Buyer/BuyerProduct/BuyerProductDetail.v
 import AllBuyerPayments from "../views/Buyer/AllBuyerPayments/AllBuyerPayments.vue"
 import BuyerCreatePayment from "../views/Buyer/AllBuyerPayments/BuyerCreatePayment.vue"
 import BuyerAllMessages from "../views/Buyer/AllMessages/BuyerAllMessages.vue"
+import BuyerCreateMessage from "../views/Buyer/AllMessages/BuyerCreateMessage.vue";
 
 const routes = [
     {
@@ -122,6 +123,12 @@ const routes = [
                 path: "all-messages",
                 name: "BuyerAllMessages",
                 component: BuyerAllMessages,
+                meta: { requireAuth: true, roles: 'buyer' }
+            },
+            {
+                path: "all-messages/create",
+                name: "BuyerCreateMessage",
+                component: BuyerCreateMessage,
                 meta: { requireAuth: true, roles: 'buyer' }
             }
         ]

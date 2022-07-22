@@ -3,7 +3,7 @@
         <h1>All Messages</h1>
     </div>
 
-    <a href="#" class="btn btn-primary mt-5">New Message</a>
+    <router-link to="/buyer/all-messages/create" class="btn btn-primary mt-5">New Message</router-link>
 
     <div class="mt-5">
     <table class="table table-bordered border-dark">
