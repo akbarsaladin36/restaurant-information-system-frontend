@@ -21,6 +21,8 @@ import MainStaff from "../views/Staff/MainStaff.vue"
 import AllOrders from "../views/Staff/AllOrders/AllOrders.vue"
 import AllPayments from "../views/Staff/AllPayments/AllPayments.vue"
 import AllStaffMessages from "../views/Staff/AllStaffMessages/AllStaffMessages.vue"
+import StaffProfile from "../views/Staff/StaffProfile/StaffProfile.vue"
+import EditStaffProfile from "../views/Staff/StaffProfile/EditStaffProfile.vue"
 
 import MainBuyer from "../views/Buyer/MainBuyer.vue"
 import Home from "../views/Buyer/Home/Home.vue"
@@ -214,6 +216,18 @@ const routes = [
                 path: 'all-messages',
                 name: 'AllStaffMessages',
                 component: AllStaffMessages,
+                meta: { requireAuth: true, roles: 'staff' }
+            },
+            {
+                path: 'profile/:id',
+                name: 'StaffProfile',
+                component: StaffProfile,
+                meta: { requireAuth: true, roles: 'staff' }
+            },
+            {
+                path: 'profile/:id/edit-profile',
+                name: 'EditStaffProfile',
+                component: EditStaffProfile,
                 meta: { requireAuth: true, roles: 'staff' }
             }
         ]

@@ -37,7 +37,8 @@ export default {
         },
         handleProfile() {
             const id = localStorage.getItem('user')
-            console.log(id)
+            this.$router.push({ name: 'StaffProfile', params: { id } })
+            // console.log(id)
         }
     }
 }

@@ -13,17 +13,20 @@
           <th>Message Title</th>
           <th>Sent To</th>
           <th>Message Status</th>
-          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Test123</td>
-          <td>Test123</td>
-          <td>Test123</td>
+        <tr v-for="(message,index) in allMessages" :key="index++">
+          <td>{{ index }}</td>
+          <td>{{ message.message_title }}</td>
+          <td>{{ message.receiver_id }}</td>
           <td>
-            Test123
+            <div v-if="message.message_status === 'received'">
+              <a href="#" class="btn btn-success">Reply</a>
+            </div>
+            <div v-else>
+              {{ message.message_status }}
+            </div>
           </td>
         </tr>
       </tbody>
@@ -32,8 +35,28 @@
 </template>
 
 <script>
+import axiosApiIntances from '../../../utils/axios'
 export default {
-    name: 'BuyerAllMessages'
+    name: 'BuyerAllMessages',
+    data() {
+      return {
+        allMessages: []
+      }
+    },
+    methods: {
+      handleGetAllMessages() {
+        axiosApiIntances.get('messages')
+        .then((res)=>{
+          this.allMessages = res.data.data
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+      }
+    },
+    created() {
+      this.handleGetAllMessages()
+    }
 }
 </script>
 
